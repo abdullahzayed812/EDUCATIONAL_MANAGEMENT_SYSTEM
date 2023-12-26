@@ -1,5 +1,15 @@
 #include <iostream>
 
-using namespace std;
+#include "helper.h"
+// #include "string"
 
-int main() { return 0; }
+using std::cin;
+using std::cout;
+using std::string;
+
+int main() {
+  vector<string> menu = {"View Course", "Register In Course", "Grades Report", "Logout"};
+  Helper::runMenu(menu);
+
+  return 0;
+}
