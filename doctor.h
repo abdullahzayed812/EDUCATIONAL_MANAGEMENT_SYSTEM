@@ -1,9 +1,13 @@
 #ifndef DOCTOR_CLASS_H
 #define DOCTOR_CLASS_H 1
 
+#include <memory>
 #include <string>
 #include <vector>
 
+#include "course.h"
+
+using std::shared_ptr;
 using std::string;
 using std::vector;
 
@@ -13,7 +17,7 @@ struct Doctor {
   string name;
   string email;
 
-  int id;
+  vector<shared_ptr<Course>> teachingCourses;
 };
 
 #endif

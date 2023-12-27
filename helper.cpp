@@ -1,5 +1,7 @@
 #include "helper.h"
 
+#include <algorithm>
+#include <cassert>
 #include <iostream>
 #include <sstream>
 #include <string>
@@ -8,6 +10,7 @@
 using std::cin;
 using std::cout;
 using std::istringstream;
+using std::ostringstream;
 using std::string;
 using std::vector;
 
@@ -41,4 +44,18 @@ int Helper::runMenu(vector<string>& menu) {
 
   cout << "\n\tEnter choice: ";
   return Helper::readInt(1, menu.size());
+}
+
+string Helper::toString(int value, int length) {
+  ostringstream oss;
+
+  oss << value;
+
+  string ret = oss.str();
+
+  while ((int)ret.size() < length) {
+    ret = "0" + ret;
+  }
+
+  return ret;
 }
