@@ -1,26 +1,23 @@
-#include <iostream>
 #include <vector>
 
-#include "assignment.h"
-#include "assignmentSolution.h"
-#include "course.h"
-#include "doctor.h"
-#include "helper.h"
-#include "student.h"
+#include "coursesManager.h"
+#include "doctorsManager.h"
+#include "studentsManager.h"
 
-using std::cin;
-using std::cout;
-using std::string;
-using std::vector;
+void generateRandomData() {
+  // Generate system users
+  gStudentsManager->addDummyData();
+  gDoctorsManager->addDummyData();
+
+  gCoursesManager->addDummyData();
+}
 
 int main() {
-  vector<int> nums = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+  generateRandomData();
 
-  vector<int> result = Helper::getRandomSubset<int>(nums, 8);
-
-  for (vector<int>::iterator it = result.begin(); it != result.end(); it++) {
-    cout << *it << "\n";
-  }
+  gStudentsManager->showStudents();
+  gDoctorsManager->showDoctors();
+  gCoursesManager->showCourses();
 
   return 0;
 }

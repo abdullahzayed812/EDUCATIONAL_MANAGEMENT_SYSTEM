@@ -16,8 +16,7 @@ struct Student {
   string password;
   string name;
   string email;
-
-  int id;
+  string id;
 
   vector<shared_ptr<Course>> registeredCourses;
 };
