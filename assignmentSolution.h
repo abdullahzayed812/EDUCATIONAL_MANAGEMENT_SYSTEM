@@ -13,7 +13,7 @@ using std::string;
 struct AssignmentSolution {
   int grade;
   string answer;
-  string studentId;
+  bool isGraded;
 
   shared_ptr<Assignment> assignment;
   shared_ptr<Student> student;

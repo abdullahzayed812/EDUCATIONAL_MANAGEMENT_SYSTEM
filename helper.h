@@ -13,6 +13,7 @@ struct Helper {
   static int readInt(int low, int high);
   static int runMenu(vector<string>& menu);
   static string toString(int value, int length);
+  static double probability();
 
   template <typename Type>
   static vector<Type> getRandomSubset(const vector<Type>& originalList, int subsetLength) {

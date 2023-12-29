@@ -5,6 +5,7 @@
 #include <string>
 #include <vector>
 
+#include "assignmentSolution.h"
 #include "course.h"
 
 using std::shared_ptr;
@@ -18,7 +19,8 @@ struct Student {
   string email;
   string id;
 
-  vector<shared_ptr<Course>> registeredCourses;
+  std::vector<std::shared_ptr<Course>> registeredCourses;
+  std::vector<std::shared_ptr<AssignmentSolution>> assignmentSolutions;
 };
 
 #endif

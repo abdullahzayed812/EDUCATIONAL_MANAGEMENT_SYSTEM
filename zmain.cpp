@@ -10,6 +10,9 @@ void generateRandomData() {
   gDoctorsManager->addDummyData();
 
   gCoursesManager->addDummyData();
+
+  // Connect objects.
+  gCoursesManager->addDummyRelationshipData();
 }
 
 int main() {

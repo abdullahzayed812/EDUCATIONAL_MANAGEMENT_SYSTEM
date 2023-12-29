@@ -59,3 +59,5 @@ string Helper::toString(int value, int length) {
 
   return ret;
 }
+
+double Helper::probability() { return std::rand() * 1.0 / RAND_MAX; }

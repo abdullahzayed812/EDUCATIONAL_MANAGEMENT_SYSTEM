@@ -4,8 +4,13 @@
 #include <iostream>
 #include <vector>
 
+#include "assignment.h"
+#include "assignmentSolution.h"
 #include "course.h"
+#include "doctorsManager.h"
+#include "helper.h"
 #include "student.h"
+#include "studentsManager.h"
 
 std::shared_ptr<CoursesManager> gCoursesManager(new CoursesManager);
 
@@ -48,8 +53,8 @@ void CoursesManager::addDummyData() {
 
 void CoursesManager::showCourses() {
   for (std::shared_ptr<Course> course : this->courses) {
-    std::cout << "Course name: " << course->name << "\tCode = " << course->code << " - Taught by Dr: " << course->doctor
-              << "\n";
+    std::cout << "Course name: " << course->name << "\tCode = " << course->code
+              << " - Taught by Dr: " << course->doctor->name << "\n";
 
     std::cout << " Registered students ID: ";
     for (std::shared_ptr<Student> student : course->registeredStudents) {
@@ -58,4 +63,56 @@ void CoursesManager::showCourses() {
     std::cout << "\n\n";
   }
   std::cout << "\n*********************************************************\n";
+}
+
+void CoursesManager::addDummyRelationshipData() {
+  // add student and assignments to course,
+  // add assignment solution
+  for (std::shared_ptr<Course> course : this->courses) {
+    // generate 75% of students per course.
+    int registeredStudentsCount = (int)gStudentsManager->students.size() * 75.0 / 100.0;
+
+    course->registeredStudents = Helper::getRandomSubset(gStudentsManager->students, registeredStudentsCount);
+    course->doctor = Helper::getRandomSubset(gDoctorsManager->doctors, 1)[0];
+
+    for (int r = 1 + std::rand() % 5; r; r--) {
+      std::shared_ptr<Assignment> assignment(new Assignment);
+
+      assignment->content = "Assignment " + Helper::toString(r, 3);
+      assignment->maxGrade = 10 + std::rand() % 100;
+      assignment->course = course;
+
+      course->assignments.push_back(assignment);
+
+      // generate 60% of course registered students solutions.
+      int solvedStudentsCount = course->registeredStudents.size() * 60.0 / 100.0;
+
+      std::vector<std::shared_ptr<Student>> someStudents =
+          Helper::getRandomSubset(course->registeredStudents, solvedStudentsCount);
+
+      for (std::shared_ptr<Student> student : someStudents) {
+        std::shared_ptr<AssignmentSolution> assignmentSolution(new AssignmentSolution());
+
+        assignmentSolution->student = student;
+        assignmentSolution->assignment = assignment;
+        assignmentSolution->answer = Helper::toString(std::rand() % 10000, 5) +
+                                     Helper::toString(std::rand() % 10000, 5) +
+                                     Helper::toString(std::rand() % 10000, 5);
+
+        if (Helper::probability() > 5.0) {
+          assignmentSolution->isGraded = true;
+          assignmentSolution->grade = std::rand() % (1 + assignment->maxGrade);
+        }
+
+        // assignment->assignmentSolutions.push_back(assignmentSolution);
+        assignmentSolution->student->assignmentSolutions.push_back(assignmentSolution);
+      }
+    }
+
+    // add course to doctor.
+    course->doctor->teachingCourses.push_back(course);
+
+    // add course to student.
+    for (std::shared_ptr<Student> student : course->registeredStudents) student->registeredCourses.push_back(course);
+  }
 }
