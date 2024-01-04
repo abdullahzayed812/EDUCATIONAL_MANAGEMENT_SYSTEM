@@ -62,7 +62,7 @@ void CoursesManager::showCourses() {
     }
     std::cout << "\n\n";
   }
-  std::cout << "\n*********************************************************\n";
+  std::cout << "\n*********************************************************\n\n\n\n";
 }
 
 void CoursesManager::addDummyRelationshipData() {

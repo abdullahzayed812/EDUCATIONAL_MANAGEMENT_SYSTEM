@@ -3,6 +3,7 @@
 #include "coursesManager.h"
 #include "doctorsManager.h"
 #include "studentsManager.h"
+#include "userFlowController.h"
 
 void generateRandomData() {
   // Generate system users
@@ -21,6 +22,8 @@ int main() {
   gStudentsManager->showStudents();
   gDoctorsManager->showDoctors();
   gCoursesManager->showCourses();
+
+  gUserFlowController->showMainMenu();
 
   return 0;
 }

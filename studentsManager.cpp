@@ -1,6 +1,7 @@
 #include "studentsManager.h"
 
 #include <iostream>
+#include <string>
 #include <vector>
 
 #include "helper.h"
@@ -38,4 +39,14 @@ void StudentsManager::showStudents() {
     }
   }
   std::cout << "\n*********************************************************\n";
+}
+
+std::shared_ptr<Student> StudentsManager::getUser(std::string username, std::string password) {
+  for (std::shared_ptr<Student> student : this->students) {
+    if (student->username == username && student->password == password) {
+      return student;
+    }
+  }
+
+  return nullptr;
 }

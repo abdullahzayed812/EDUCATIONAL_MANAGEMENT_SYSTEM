@@ -39,3 +39,13 @@ void DoctorsManager::showDoctors() {
   }
   std::cout << "\n*********************************************************\n";
 }
+
+std::shared_ptr<Doctor> DoctorsManager::getUser(std::string username, std::string password) {
+  for (std::shared_ptr<Doctor> doctor : this->doctors) {
+    if (doctor->username == username && doctor->password == password) {
+      return doctor;
+    }
+  }
+
+  return nullptr;
+}
