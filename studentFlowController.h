@@ -14,6 +14,7 @@ struct StudentFlowController {
   bool isValidUser(std::string username, std::string password);
   void takeControl(std::string username, std::string password);
   void showMainMenu();
+  void registerInCourse();
 };
 
 extern std::shared_ptr<StudentFlowController> gStudentFlowController;

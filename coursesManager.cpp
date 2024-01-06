@@ -2,6 +2,7 @@
 
 #include <iomanip>
 #include <iostream>
+#include <memory>
 #include <vector>
 
 #include "assignment.h"
@@ -115,4 +116,26 @@ void CoursesManager::addDummyRelationshipData() {
     // add course to student.
     for (std::shared_ptr<Student> student : course->registeredStudents) student->registeredCourses.push_back(course);
   }
+}
+
+std::vector<std::shared_ptr<Course>> CoursesManager::getComplementCourses(
+    std::vector<std::shared_ptr<Course>> courses) {
+  std::vector<std::shared_ptr<Course>> remainderCourses;
+
+  for (std::shared_ptr<Course> course : this->courses) {
+    bool isFound = false;
+
+    for (std::shared_ptr<Course> _course : courses) {
+      if (course->code == _course->code) {
+        isFound = true;
+        break;
+      }
+    }
+
+    if (!isFound) {
+      remainderCourses.push_back(course);
+    }
+  }
+
+  return remainderCourses;
 }
