@@ -7,6 +7,7 @@
 #include "coursesManager.h"
 #include "helper.h"
 // #include "student.h"
+#include "assignmentSolution.h"
 #include "course.h"
 #include "doctor.h"
 #include "studentsManager.h"
@@ -33,6 +34,10 @@ void StudentFlowController::showMainMenu() {
 
     if (choice == 1) {
       this->registerInCourse();
+    } else if (choice == 2) {
+      this->listCourses();
+    } else if (choice == 3) {
+      this->viewCourse();
     }
   }
 }
@@ -58,4 +63,59 @@ void StudentFlowController::registerInCourse() {
   this->currentStudent->registeredCourses.push_back(availableCourses[choice - 1]);
 
   std::cout << "\n!!! REGISTERED SUCCESSFULLY !!!\n";
+}
+
+void StudentFlowController::listCourses() {
+  int pos;
+
+  std::cout << "\nMy courses list: \n";
+
+  for (std::shared_ptr<Course> course : this->currentStudent->registeredCourses) {
+    std::cout << "\t" << ++pos << " - with code: " << course->name;
+    std::cout << "\t course code: " << course->code << "\n";
+  }
+}
+
+void StudentFlowController::viewCourse() {
+  if (this->currentStudent->registeredCourses.size() == 0) {
+    std::cout << "\nNo registered courses\n";
+    return;
+  }
+
+  this->listCourses();
+
+  int coursesCount = (int)this->currentStudent->registeredCourses.size();
+
+  std::cout << "\n\tWhich ith [1 - " << coursesCount << "] course to view: ";
+
+  int choice = Helper::readInt(1, coursesCount);
+
+  this->currentCourse = this->currentStudent->registeredCourses[choice];
+
+  std::cout << "\n\tCourse name: " << this->currentCourse->name << "\t with code: " << this->currentCourse->code
+            << "\n";
+  std::cout << "\tTaught by doctor: " << this->currentCourse->doctor->name << "\n";
+  std::cout << "\tCourse has " << this->currentCourse->assignments.size() << " assignments: \n";
+
+  int pos = 0;
+
+  for (std::shared_ptr<Assignment> assignment : this->currentCourse->assignments) {
+    std::cout << "\t\tAssignment - " << ++pos << " : ";
+
+    std::shared_ptr<AssignmentSolution> assignmentSolution = this->currentStudent->getAssignmentSolution(assignment);
+
+    if (assignmentSolution == nullptr) {
+      std::cout << "NOT submitted - NA";
+    } else {
+      std::cout << "submitted ";
+
+      if (assignmentSolution->isGraded) {
+        std::cout << assignmentSolution->grade;
+      } else {
+        std::cout << "NA";
+      }
+    }
+
+    std::cout << " / " << assignment->maxGrade << "\n";
+  }
 }

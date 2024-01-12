@@ -21,6 +21,8 @@ struct Student {
 
   std::vector<std::shared_ptr<Course>> registeredCourses;
   std::vector<std::shared_ptr<AssignmentSolution>> assignmentSolutions;
+
+  std::shared_ptr<AssignmentSolution> getAssignmentSolution(std::shared_ptr<Assignment> assignment);
 };
 
 #endif
