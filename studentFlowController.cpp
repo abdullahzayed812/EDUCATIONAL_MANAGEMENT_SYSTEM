@@ -3,6 +3,7 @@
 #include <iostream>
 #include <memory>
 #include <string>
+#include <tuple>
 
 #include "assignmentSolution.h"
 #include "course.h"
@@ -39,7 +40,10 @@ void StudentFlowController::showMainMenu() {
     } else if (choice == 3) {
       this->viewCourse();
     } else if (choice == 4) {
-        }
+      this->showGradesReport();
+    } else {
+      break;
+    }
   }
 }
 
@@ -186,4 +190,16 @@ void StudentFlowController::submitCourseAssignment() {
 
   this->currentStudent->assignmentSolutions.push_back(newAssignmentSolution);
   currentAssignment->assignmentSolutions.push_back(newAssignmentSolution);
+}
+
+void StudentFlowController::showGradesReport() {
+  std::vector<std::tuple<std::string, int, int, int>> studentGrades =
+      this->currentStudent->computeGradesStatistic();
+
+  for (std::tuple<std::string, int, int, int> studentCourseGrade : studentGrades) {
+    std::cout << "\n\tCourse code: " << std::get<0>(studentCourseGrade)
+              << "\tTotal assignments: " << std::get<1>(studentCourseGrade)
+              << "\tYour mark: " << std::get<2>(studentCourseGrade) << " / "
+              << std::get<3>(studentCourseGrade) << "\n";
+  }
 }

@@ -3,6 +3,7 @@
 
 #include <memory>
 #include <string>
+#include <tuple>
 #include <vector>
 
 #include "assignmentSolution.h"
@@ -23,6 +24,7 @@ struct Student {
   std::vector<std::shared_ptr<AssignmentSolution>> assignmentSolutions;
 
   std::shared_ptr<AssignmentSolution> getAssignmentSolution(std::shared_ptr<Assignment> assignment);
+  std::vector<std::tuple<std::string, int, int, int>> computeGradesStatistic();
 };
 
 #endif

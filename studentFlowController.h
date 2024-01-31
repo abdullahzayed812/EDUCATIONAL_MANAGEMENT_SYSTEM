@@ -20,6 +20,7 @@ struct StudentFlowController {
   void showCourseMenu();
   void unregisterFromCourse();
   void submitCourseAssignment();
+  void showGradesReport();
 };
 
 extern std::shared_ptr<StudentFlowController> gStudentFlowController;
