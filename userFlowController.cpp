@@ -13,19 +13,22 @@
 #include "studentFlowController.h"
 #include "studentsManager.h"
 
-std::shared_ptr<UserFlowController> gUserFlowController(new UserFlowController());
+std::shared_ptr<UserFlowController> gUserFlowController(
+    new UserFlowController());
 
 void UserFlowController::showMainMenu() {
   std::vector<std::string> menu = {"Sign In", "Sign Up", "Shutdown"};
 
   int choice = Helper::runMenu(menu);
 
-  if (choice == 1) {
-    this->signIn();
-  } else if (choice == 2) {
-    this->signUp();
-  } else if (choice == 3) {
-    return;
+  while (true) {
+    if (choice == 1) {
+      this->signIn();
+    } else if (choice == 2) {
+      this->signUp();
+    } else if (choice == 3) {
+      return;
+    }
   }
 }
 

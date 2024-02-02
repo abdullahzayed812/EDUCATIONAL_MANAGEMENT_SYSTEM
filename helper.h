@@ -3,6 +3,7 @@
 
 #include <algorithm>
 #include <cassert>
+#include <memory>
 #include <string>
 #include <vector>
 
@@ -13,8 +14,8 @@ struct Helper {
   static double probability();
 
   template <typename Type>
-  static std::vector<Type> getRandomSubset(const std::vector<Type>& originalList,
-                                           int subsetLength) {
+  static std::vector<Type> getRandomSubset(
+      const std::vector<Type>& originalList, int subsetLength) {
     assert((int)originalList.size() >= subsetLength);
 
     std::vector<int> indices;
