@@ -73,7 +73,8 @@ void CoursesManager::addDummyRelationshipData() {
     // generate 75% of students per course.
     int registeredStudentsCount = (int)gStudentsManager->students.size() * 75.0 / 100.0;
 
-    course->registeredStudents = Helper::getRandomSubset(gStudentsManager->students, registeredStudentsCount);
+    course->registeredStudents =
+        Helper::getRandomSubset(gStudentsManager->students, registeredStudentsCount);
     course->doctor = Helper::getRandomSubset(gDoctorsManager->doctors, 1)[0];
 
     for (int r = 1 + std::rand() % 5; r; r--) {
@@ -114,7 +115,9 @@ void CoursesManager::addDummyRelationshipData() {
     course->doctor->teachingCourses.push_back(course);
 
     // add course to student.
-    for (std::shared_ptr<Student> student : course->registeredStudents) student->registeredCourses.push_back(course);
+    for (std::shared_ptr<Student> student : course->registeredStudents) {
+      student->registeredCourses.push_back(course);
+    }
   }
 }
 

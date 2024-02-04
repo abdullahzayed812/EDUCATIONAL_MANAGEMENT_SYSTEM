@@ -22,7 +22,7 @@ bool StudentFlowController::isValidUser(std::string username, std::string passwo
 void StudentFlowController::takeControl(std::string username, std::string password) {
   this->currentStudent = gStudentsManager->getUser(username, password);
 
-  std::cout << "\t\t\t******* Welcome " << currentStudent->name << " *******\n\n";
+  std::cout << "\t\t\t******* Welcome " << this->currentStudent->name << " *******\n\n";
 
   this->showMainMenu();
 }
@@ -72,12 +72,12 @@ void StudentFlowController::registerInCourse() {
 }
 
 void StudentFlowController::listCourses() {
-  int pos;
+  int pos = 0;
 
   std::cout << "\nMy courses list: \n";
 
   for (std::shared_ptr<Course> course : this->currentStudent->registeredCourses) {
-    std::cout << "\t" << ++pos << " - with code: " << course->name;
+    std::cout << "\t" << ++pos << " - course name: " << course->name;
     std::cout << "\t course code: " << course->code << "\n";
   }
 }

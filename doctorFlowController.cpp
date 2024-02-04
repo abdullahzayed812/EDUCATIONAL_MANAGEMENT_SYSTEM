@@ -17,6 +17,8 @@ bool DoctorFlowController::isValidUser(std::string username, std::string passwor
 void DoctorFlowController::takeControl(std::string username, std::string password) {
   this->currentDoctor = gDoctorsManager->getUser(username, password);
 
+  std::cout << "\t\t\t******* Welcome DR " << this->currentDoctor->name << " *******\n\n";
+
   this->showMainMenu();
 }
 
@@ -28,21 +30,19 @@ void DoctorFlowController::showMainMenu() {
   while (true) {
     if (choice == 1) {
       this->listCourses();
+    } else {
+      break;
     }
   }
 }
 
 void DoctorFlowController::listCourses() {
+  int pos = 0;
+
+  std::cout << "\nMy courses list: \n";
+
   for (std::shared_ptr<Course> course : this->currentDoctor->teachingCourses) {
-    std::cout << "Course code: " << course->code << "\t" << course->registeredStudents.size()
-              << " registered students\t" << course->assignments.size() << " assignments\n";
-
-    // assignments
-    std::cout << "Assignments: \n\t";
-
-    // for (std::shared_ptr<Assignment> assignment : course->assignments) {
-    //   std::cout << "Student ID: " << assignment->student->id << "\t";
-
-    // }
+    std::cout << "\t" << ++pos << " - Course name: " << course->name;
+    std::cout << "\t course code: " << course->code << "\n";
   }
 }
