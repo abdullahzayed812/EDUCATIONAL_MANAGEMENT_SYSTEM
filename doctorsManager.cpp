@@ -18,7 +18,8 @@ void DoctorsManager::addDummyData() {
 
     doctor->username = "d" + Helper::toString(i, 3);
     doctor->password = "d" + Helper::toString(i, 3);
-    doctor->name = names[std::rand() % (int)names.size()] + " " + names[std::rand() % (int)names.size()];
+    doctor->name =
+        names[std::rand() % (int)names.size()] + " " + names[std::rand() % (int)names.size()];
     doctor->email = Helper::toString(i, 3) + "@gmail.com";
 
     this->doctors.push_back(doctor);
@@ -27,7 +28,8 @@ void DoctorsManager::addDummyData() {
 
 void DoctorsManager::showDoctors() {
   for (std::shared_ptr<Doctor> doctor : this->doctors) {
-    std::cout << "Doctor " << doctor->name << " is teaching " << (int)doctor->teachingCourses.size() << " courses.";
+    std::cout << "Doctor " << doctor->name << " is teaching " << (int)doctor->teachingCourses.size()
+              << " courses.";
 
     if (doctor->teachingCourses.size() > 0) {
       std::cout << " Courses codes: ";

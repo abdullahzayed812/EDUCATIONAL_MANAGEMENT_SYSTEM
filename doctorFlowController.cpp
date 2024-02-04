@@ -25,14 +25,11 @@ void DoctorFlowController::showMainMenu() {
 
   int choice = Helper::runMenu(menu);
 
-  // if (choice == 1) {
-  //   this->listCourses();
-  // } else if (choice == 2) {
-  //   this->createCourse();
-  // } else if (choice == 3) {
-  //   this->viewCourse();
-  // } else
-  //   return;
+  while (true) {
+    if (choice == 1) {
+      this->listCourses();
+    }
+  }
 }
 
 void DoctorFlowController::listCourses() {
